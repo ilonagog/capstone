@@ -26,7 +26,7 @@ c5 = Comment.create(content: "When can i pick it up?", user_id: u2.id, post_id: 
 c6 = Comment.create(content: "For how old is this?", user_id: u2.id, post_id: p6.id)
 c7 = Comment.create(content: "Interested ❤️", user_id: u2.id, post_id: p7.id)
 
-m1 = Message.create(body: "Hello ", sender_id: u1.id, receiver_id: u3.id)
-m2 = Message.create(body: "Hello, want to set time up?", sender_id: u3.id, receiver_id: u1.id)
-m3 = Message.create(body: "Yes anytime!", sender_id: u1.id, receiver_id: u3.id)
-m4 = Message.create(body: "Okay then this Saturday at 11am", sender_id: u3.id, receiver_id: u1.id)
+m1 = Message.create(content: "Hello ", sender_id: u1.id, receiver_id: u3.id)
+m2 = Message.create(content: "Hello, want to set time up?", sender_id: u3.id, receiver_id: u1.id)
+m3 = Message.create(content: "Yes anytime!", sender_id: u1.id, receiver_id: u3.id)
+m4 = Message.create(content: "Okay then this Saturday at 11am", sender_id: u3.id, receiver_id: u1.id)

@@ -1,48 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
+const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [comments, setComments] = useState([])
     const [errors, setErrors] = useState([])
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [comments, setComments] = useState([])
 
     useEffect(() => {
         fetch('/me')
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.error) {
-                    setLoggedIn(false)
+                    setIsLoggedIn(false)
                 } else {
-                    setLoggedIn(true)
+                    setIsLoggedIn(true)
                     setUser(data)
-                    fetchComments(data.comments)
+                    fetchComments()
                 }
             })
     })
+
     const fetchComments = () => {
-        fetch('/comments')
+        fetch("/comments")
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                setComments(data)
             })
     }
     const login = (user) => {
         setUser(user)
-        setLoggedIn(true)
-        fetchComments()
+        setIsLoggedIn(true)
     }
     const logout = () => {
         setUser({})
-        setLoggedIn(false)
+        isLoggedIn(false)
     }
-    const signup = () => {
+    const signup = (user) => {
         setUser(user)
-        setLoggedIn(true)
+        setIsLoggedIn(true)
     }
-
 
     return (
-        <UserContext.Provider value={{ user, setUser, login, logout, signup, errors, setErrors, loggedIn, comments }}>
+        <UserContext.Provider value={{ user, setUser, errors, setErrors, login, logout, signup, isLoggedIn, comments }}>
             {children}
         </UserContext.Provider>
     )
